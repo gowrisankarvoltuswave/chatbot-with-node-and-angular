@@ -1,0 +1,228 @@
+<div>
+  <div class="col-md-12">
+    <div class="col-md-8">
+      <div class="col-md-10" ng-if="list.length">
+        <h3>Subordinates of {{leadObj.userName}}</h1>
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th>Employee Id</th>
+                <th>Employee Name</th>
+                <th>Total Leaves</th>
+                <th>Used Leaves</th>
+                <th>Remaining Leaves</th>
+
+              </tr>
+            </thead>
+            <tbody>
+              <tr ng-repeat="emp in list" ng-if="leadObj.userId!=emp.employeeId">
+                <td>{{emp.employeeId}}</td>
+                <td>{{emp.employeeName}}</td>
+                <td>{{emp.totalLeaves}}</td>
+                <td>{{emp.usedLeaves}}</td>
+                <td>{{emp.totalLeaves - emp.usedLeaves}}</td>
+
+              </tr>
+            </tbody>
+          </table>
+      </div>
+      <div class="col-md-10" ng-if="leaveRel">
+        <div class="breadcrumb" style="font-size: 147%;font-family: 'Caveat', cursive;color: #0661ba;">
+          <p>Leave Applied From
+            <b>{{fromDate | date:'MMM dd, yyyy'}}</b> To
+            <b>{{toDate | date:'MMM dd, yyyy'}}</b>
+          </p>
+          <p> Reason :
+            <b>{{leaveRel.reason}}</b>
+          </p>
+          <p>Applied ID :
+            <b>{{leaveRel.appliedBy}}</b>
+          </p>
+        </div>
+      </div>
+
+    </div>
+    <div class="col-md-4" style="position: absolute;right: 0;">
+      <div class="panel panel-primary">
+        <div class="panel-heading">
+          <h3 class="text-center">{{userName}}'s Chat Bot
+            <span class="fa fa-sign-out logout" ng-click="logout()"></span>
+          </h3>
+        </div>
+        <div class="panel-body" id="scrollBody">
+          <h5 class="agentHeading">Talk to {{agent}}</h5>
+          <div class="col-md-2">
+            <ul class="agents">
+              <li class="agent" ng-click="selectAgent('leave','cc7a7cd3d76c4c0cb0189dbfcf9c9602')">
+                <a href="" class="active"><span ng-if="lactive"><i class="fa fa-circle text-success"></i> </span> Leave</a>
+              </li>
+              <li class="agent" ng-click="selectAgent('purchase','8415f0dc82864be98c4fb985691c9f84')">
+                <a href=""><span ng-if="pactive"><i class="fa fa-circle text-success"></i> </span> Purchase</a>
+              </li>
+            </ul>
+          </div>
+
+          <div class="col-md-10">
+            <ul>
+              <li ng-repeat="msg in myChat.mesageArr track by $index" style="list-style: none;">
+                <div domDirective="msg">
+                  <p class="userMessage" ng-if="msg.userMessage">{{msg.userMessage}}</p>
+                  <p class="botMessage" ng-if="msg.botMessage">{{msg.botMessage}}</p>
+                  <p id="cardMsg{{$index+1}}"></p>
+                </div>
+
+              </li>
+            </ul>
+          </div>
+
+        </div>
+        <div class="panel-footer">
+          <input type="text" ng-model="val" placeholder="message" ng-keyup="$event.keyCode == 13 && submitMessage(val)" style="padding:10px 152px">
+          <button type="submit" class="sendBtn" ng-click="submitMessage(val)">
+            <i class="fa fa-paper-plane fa-2x" aria-hidden="true"></i>
+          </button>
+        </div>
+
+      </div>
+    </div>
+  </div>
+  <div class="col-md-3">
+    <div id="testId"></div>
+  </div>
+  <div class="row">
+    <div class="row col-md-3">
+      <div ng-bind="test"></div>
+    </div>
+  </div>
+
+
+
+</div>
+<style>
+  .panel-primary>.panel-heading {
+    color: #fff;
+    background-color: #818181;
+    border-color: #818181;
+  }
+
+  .chatbot {
+    width: 450px;
+    height: 630px;
+    position: fixed;
+    right: 10px;
+    bottom: 10px;
+    display: none;
+  }
+
+  #scrollBody {
+    overflow-y: auto;
+    height: 630px;
+  }
+
+  .sendBtn {
+    padding: 5px 11px;
+    vertical-align: bottom;
+  }
+
+  .botMessage {
+    text-align: left;
+    position: relative;
+    left: 50px;
+    list-style: none;
+    background: #ddda82;
+    width: 90%;
+    padding: 15px 24px;
+    border-radius: 10px;
+    margin: 20px -4px;
+    box-shadow: -3px 3px 7px;
+    overflow-x: auto;
+  }
+
+  .userMessage {
+    text-align: left;
+    position: relative;
+    left: -40px;
+    list-style: none;
+    background: #9cb492;
+    width: 90%;
+    padding: 15px 24px;
+    border-radius: 10px;
+    margin: 20px -4px;
+    box-shadow: -3px 3px 7px;
+
+  }
+
+  span.fa.fa-sign-out.logout {
+    float: right;
+    color: #ee7c7c;
+    font-size: xx-large;
+    cursor: pointer;
+  }
+
+  /* ******************************* Adaptive cards *********************************/
+
+  .ac-image>img {
+    max-height: 100%;
+    min-width: 0px;
+    width: 90px !important;
+    border-radius: 18% !important;
+    background-position: 50% 50%;
+    background-repeat: no-repeat;
+  }
+
+  p>.ac-container {
+    /* border: 2px solid #e3ddd6; */
+    box-shadow: -2px 1px 7px #93938f;
+  }
+
+  .agents {
+    height: 600px;
+    background: #f3f4f4;
+    position: fixed;
+    list-style: none;
+    padding: 50px 0px;
+    margin-left: -26px;
+    margin-top: 15px;
+  }
+
+  .agent {
+    background: #dddddd;
+    padding: 10px 20px;
+  }
+
+  .activeagent {
+    background: #62d350;
+    padding: 10px 20px;
+  }
+
+  .agent>a {
+    color: #514f4f;
+    text-decoration: none;
+  }
+
+  h5.agentHeading {
+    text-align: center;
+    background: black;
+    color: white;
+    padding: 8px 148px;
+    position: fixed;
+    top: 68px;
+    z-index: 1;
+    width: 29%;
+    font-weight: 700;
+    font-size: 13px;
+  }
+
+  /* #chatbot{
+    display: none;
+  } */
+</style>
+<script>
+
+  var objDiv = document.getElementById("scrollBody");
+  // console.log(objDiv.scrollTop)
+  // console.log(objDiv.scrollHeight)
+  objDiv.scrollTop = objDiv.scrollHeight;
+
+
+</script>

@@ -1,0 +1,59 @@
+<!doctype html>
+<html ng-app="authApp" class="no-js {{containerClass}}">
+<!-- <meta name="google-signin-scope" content="profile email"> -->
+<!-- <meta name="google-signin-client_id" content="980818055652-40mtbld2vgtvmm07554lffh305c3qlrn.apps.googleusercontent.com"> -->
+
+<head>
+    <!--<base href="/">-->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-110864923-1"></script>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!--<title>Welcome</title>-->
+    <title update-title></title>
+
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="google-site-verification" content="pCLoCF-lKLRCqjuzerATpRUnDSVsDRBKyDeS7WEX6X0" />
+    <!--<script src="bower_components/angularjs-social-login/angularjs-social-login.js"></script>-->
+    <!--Bower components end-->
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="stylesheets/google-drive.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Caveat|Sacramento" rel="stylesheet">
+
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.5/angular.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-resource/1.6.8/angular-resource.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/1.0.3/angular-ui-router.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-sanitize/1.6.9/angular-sanitize.min.js"></script>
+    <script src="https://unpkg.com/adaptivecards/dist/adaptivecards.js"></script>
+
+    <script src="library/oauth.js"></script>
+    
+    <!-- <script src="https://apis.google.com/js/platform.js" async defer></script> -->
+    <link rel="canonical" href="http://localhost:3000">
+    
+</head>
+
+<body>
+
+    <div id="wrap" ui-view></div>
+
+</body>
+
+<script src="scripts/app.js"></script>
+<script src="scripts/config.js"></script>
+<script src="scripts/controllers/loginCtrl.js"></script>
+<script src="scripts/controllers/chatCtrl.js"></script>
+<script src="scripts/services/subordinateSvc.js"></script>
+<script src="scripts/services/loginSvc.js"></script>
+<script src="scripts/services/applyleaveSvc.js"></script>
+<script src="scripts/services/submitleaveSvc.js"></script>
+<script src="scripts/services/chatSvc.js"></script>
+<script src="scripts/services/interceptor.js"></script>
+
+</html>

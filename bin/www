@@ -1,0 +1,104 @@
+#!/usr/bin/env node
+
+/**
+ * Module dependencies.
+ */
+
+var app = require('../app');
+var debug = require('debug')('chatbot:server');
+var http = require('http');
+const PORT = process.env.PORT || 4726
+var ngrok = require('ngrok');
+
+/**
+ * Get port from environment and store in Express.
+ */
+
+// var port = normalizePort(process.env.PORT || '4726');
+app.set('port', PORT);
+
+/**
+ * Create HTTP server.
+ */
+
+var server = http.createServer(app);
+
+/**
+ * Listen on provided port, on all network interfaces.
+ */
+var opts = ngrok.connect({
+  proto: 'http', // http|tcp|tls 
+  addr: 5000, // port or network address 
+  auth: 'haimaganti@gmail.com:ngrok@4726', // http basic authentication for tunnel 
+  subdomain: 'sankar', // reserved tunnel name https://alex.ngrok.io, 
+  authtoken: '556Rg7uDL8ENFexg2EHK7_7rszX89CMwkyDZFCA4qV8' // your authtoken from ngrok.com 
+}, function (err, url) { });
+
+ngrok.connect(function (err, url) { }); // https://757c1652.ngrok.io -> http://localhost:5000 
+ngrok.connect(9090, function (err, url) { }); // https://757c1652.ngrok.io -> http://localhost:5000 
+ngrok.connect({ proto: 'tcp', addr: 22 }, function (err, url) { }); // tcp://0.tcp.ngrok.io:48590 
+ngrok.connect(opts, function (err, url) { });
+server.listen(PORT, () => console.log(`Listening on ${PORT}`))
+// server.listen(port);
+// server.on('error', onError);
+// server.on('listening', onListening);
+
+/**
+ * Normalize a port into a number, string, or false.
+ */
+
+function normalizePort(val) {
+  var port = parseInt(val, 10);
+
+  if (isNaN(port)) {
+    // named pipe
+    return val;
+  }
+
+  if (port >= 0) {
+    // port number
+    return port;
+  }
+
+  return false;
+}
+
+/**
+ * Event listener for HTTP server "error" event.
+ */
+
+function onError(error) {
+  if (error.syscall !== 'listen') {
+    throw error;
+  }
+
+  var bind = typeof port === 'string'
+    ? 'Pipe ' + port
+    : 'Port ' + port;
+
+  // handle specific listen errors with friendly messages
+  switch (error.code) {
+    case 'EACCES':
+      console.error(bind + ' requires elevated privileges');
+      process.exit(1);
+      break;
+    case 'EADDRINUSE':
+      console.error(bind + ' is already in use');
+      process.exit(1);
+      break;
+    default:
+      throw error;
+  }
+}
+
+/**
+ * Event listener for HTTP server "listening" event.
+ */
+
+function onListening() {
+  var addr = server.address();
+  var bind = typeof addr === 'string'
+    ? 'pipe ' + addr
+    : 'port ' + addr.port;
+  debug('Listening on ' + bind);
+}
